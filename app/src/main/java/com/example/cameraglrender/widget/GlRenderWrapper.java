@@ -187,7 +187,7 @@ public class GlRenderWrapper implements GLSurfaceView.Renderer, SurfaceTexture.O
 
     @Override
     public void onPreviewFrame(byte[] data, int len) {
-        if (tracker != null) tracker.detector(data);
+        if (tracker != null && (stickEnable || bigEyeEnable)) tracker.detector(data);
     }
 
     public void setOnRecordListener(OnRecordListener onRecordListener) {
