@@ -120,6 +120,7 @@ public class AvcRecorder {
         } else if (status == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
             //编码格式改变 ，第一次start 都会调用一次
             MediaFormat outputFormat = mediaCodec.getOutputFormat();
+            //设置mediaMuxer 的视频轨
             avcIndex = mediaMuxer.addTrack(outputFormat);
             mediaMuxer.start();
         } else if (status == MediaCodec.INFO_OUTPUT_BUFFERS_CHANGED) {
@@ -136,7 +137,7 @@ public class AvcRecorder {
                 outputBuffer.position(bufferInfo.offset);
 
                 outputBuffer.limit(bufferInfo.size - bufferInfo.offset);
-
+                //交给mediaMuxer 保存
                 mediaMuxer.writeSampleData(avcIndex, outputBuffer, bufferInfo);
 
             }

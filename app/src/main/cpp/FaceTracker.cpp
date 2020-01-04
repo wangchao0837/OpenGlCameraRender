@@ -20,9 +20,9 @@ FaceTracker::FaceTracker(const char *model, const char *seeta) {
 void FaceTracker::detector(Mat src, vector<Rect2f> &rects) {
 
     vector<Rect> faces;
-
+    //检测人脸
     tracker->process(src);
-
+    //拿到人脸坐标信息
     tracker->getObjects(faces);
 
 
@@ -30,7 +30,7 @@ void FaceTracker::detector(Mat src, vector<Rect2f> &rects) {
         Rect face = faces[0];
         rects.push_back(Rect2f(face.x, face.y, face.width, face.height));
 
-
+        //seeta 可以检测五个坐标点
         seeta::FacialLandmark points[5];
         seeta::ImageData imageData(src.cols, src.rows);
 
@@ -44,6 +44,7 @@ void FaceTracker::detector(Mat src, vector<Rect2f> &rects) {
         bbox.height = face.height;
 
         faceInfo.bbox = bbox;
+        //检测 人眼 等五个点
         faceAlignment->PointDetectLandmarks(imageData, faceInfo, points);
 
         for (int i = 0; i < 5; ++i) {
@@ -51,7 +52,6 @@ void FaceTracker::detector(Mat src, vector<Rect2f> &rects) {
         }
 
     }
-
 
 }
 

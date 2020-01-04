@@ -62,17 +62,18 @@ public class FaceTracker {
         message.obj = data;
         mHandler.sendMessage(message);
     }
-
+    //传入模型文件， 创建人脸识别追踪器和人眼定位器
     private native long native_create(String model, String seeta);
 
+    //开始追踪
     private native void native_start(long self);
 
+    //停止追踪
     private native void native_stop(long self);
 
+    //检测人脸
     private native Face native_detector(long self, byte[] data, int cameraId, int width, int
             height);
-
-    public native static void saveYUV(byte[] yuv);
 
 
 }

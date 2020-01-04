@@ -78,16 +78,25 @@ public class StickerFilter extends AbstractFBOFilter {
     }
 
     private void onDrawStick() {
+        //开启混合模式
         GLES20.glEnable(GLES20.GL_BLEND);
 
+        //设置贴图模式
+        // 1：src 源图因子 ： 要画的是源  (耳朵)
+        // 2: dst : 已经画好的是目标  (从其他filter来的图像)
+        //画耳朵的时候  GL_ONE:就直接使用耳朵的所有像素 原本是什么样子 我就画什么样子
+        // 表示用1.0减去源颜色的alpha值来作为因子
+        //  耳朵不透明 (0,0 （全透明）- 1.0（不透明）) 目标图对应位置的像素就被融合掉了 不见了
         GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);
 
         float x = mFace.landmarks[0];
         float y = mFace.landmarks[1];
 
+        //这里的坐标是相对于 传入opencv识别的图像的像素，需要转换为在屏幕的位置
         x = x / mFace.imgWidth * mOutputWidth;
         y = y / mFace.imgHeight * mOutputHeight;
 
+        //要绘制的位置和大小，贴纸是画在耳朵上的，直接锁定人脸坐标就可以
         GLES20.glViewport((int) x, (int) y - mBitmap.getHeight(), (int) ((float) mFace.width / mFace.imgWidth * mOutputWidth), mBitmap.getHeight());
 
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, mFrameBuffers[0]);

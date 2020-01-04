@@ -37,18 +37,18 @@ public class AbstractFBOFilter extends BaseFilter {
 
     private void loadFOB() {
 
-
         if (mFrameBuffers != null) {
             destroyFrameBuffers();
         }
+        //创建FrameBuffer
         mFrameBuffers = new int[1];
         GLES20.glGenFramebuffers(mFrameBuffers.length, mFrameBuffers, 0);
-
+        //穿件FBO中的纹理
         mFBOTextures = new int[1];
         OpenGlUtils.glGenTextures(mFBOTextures);
 
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mFBOTextures[0]);
-
+        //指定FBO纹理的输出图像的格式 RGBA
         GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, mOutputWidth, mOutputHeight,
                 0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, null);
 
@@ -60,7 +60,6 @@ public class AbstractFBOFilter extends BaseFilter {
 
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
-
 
     }
 

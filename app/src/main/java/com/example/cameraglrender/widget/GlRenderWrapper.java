@@ -62,18 +62,20 @@ public class GlRenderWrapper implements GLSurfaceView.Renderer, SurfaceTexture.O
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+
         camera2Helper = new Camera2Helper((Activity) glRenderView.getContext());
 
         mTextures = new int[1];
-
+        //创建一个纹理
         GLES20.glGenTextures(mTextures.length, mTextures, 0);
-
+        //将纹理和离屏buffer绑定
         mSurfaceTexture = new SurfaceTexture(mTextures[0]);
 
         mSurfaceTexture.setOnFrameAvailableListener(this);
 
-
+        //使用fbo 将samplerExternalOES 输入到sampler2D中
         cameraFilter = new CameraFilter(glRenderView.getContext());
+        //负责将图像绘制到屏幕上
         screenFilter = new ScreenFilter(glRenderView.getContext());
 
     }
@@ -84,6 +86,7 @@ public class GlRenderWrapper implements GLSurfaceView.Renderer, SurfaceTexture.O
 
         camera2Helper.setPreviewSizeListener(this);
         camera2Helper.setOnPreviewListener(this);
+        //打开相机
         camera2Helper.openCamera(width, height, mSurfaceTexture);
         tracker = new FaceTracker("/sdcard/lbpcascade_frontalface.xml", "/sdcard/seeta_fa_v1.1.bin", camera2Helper);
         tracker.startTrack();
@@ -99,6 +102,7 @@ public class GlRenderWrapper implements GLSurfaceView.Renderer, SurfaceTexture.O
         screenX = width - (int) (mPreviewHeight / max);
         screenY = height - (int) (mPreviewWdith / max);
 
+        //prepare 传如 绘制到屏幕上的宽 高 起始点的X坐标 起使点的Y坐标
         cameraFilter.prepare(screenSurfaceWid, screenSurfaceHeight, screenX, screenY);
         screenFilter.prepare(screenSurfaceWid, screenSurfaceHeight, screenX, screenY);
 
@@ -118,12 +122,12 @@ public class GlRenderWrapper implements GLSurfaceView.Renderer, SurfaceTexture.O
         //执行上一个：glClearColor配置的屏幕颜色
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
 
+        //更新获取一张图
         mSurfaceTexture.updateTexImage();
 
         mSurfaceTexture.getTransformMatrix(mtx);
-
+        //cameraFiler需要一个矩阵，是Surface和我们手机屏幕的一个坐标之间的关系
         cameraFilter.setMatrix(mtx);
-
 
         textureId = cameraFilter.onDrawFrame(mTextures[0]);
         if (bigEyeEnable) {

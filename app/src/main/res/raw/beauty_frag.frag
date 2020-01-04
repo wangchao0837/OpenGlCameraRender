@@ -10,6 +10,8 @@ uniform int height;
 vec2 blurCoordinates[20];
 
 void main(){
+
+    //对于100*100 的像素，1/100 步长为
     vec2 singleStepOffset = vec2(1.0/float(width), 1.0/float(height));
 
     blurCoordinates[0] = aCoord.xy + singleStepOffset * vec2(0.0, -10.0);

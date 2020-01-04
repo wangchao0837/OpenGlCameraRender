@@ -82,11 +82,12 @@ public class BaseFilter {
 
 
     private void initilize(Context mContext) {
+        //读取着色器信息
         mVertexShader = OpenGlUtils.readRawShaderFile(mContext, mVertexShaderId);
         mFragShader = OpenGlUtils.readRawShaderFile(mContext, mFragShaderId);
-
+        //创建着色器程序
         mProgramId = OpenGlUtils.loadProgram(mVertexShader, mFragShader);
-
+        //获取着色器变量，需要赋值
         vPosition = GLES20.glGetAttribLocation(mProgramId, "vPosition");
         vCoord = GLES20.glGetAttribLocation(mProgramId, "vCoord");
         vMatrix = GLES20.glGetUniformLocation(mProgramId, "vMatrix");
@@ -103,6 +104,7 @@ public class BaseFilter {
     }
 
     public int onDrawFrame(int textureId) {
+
         GLES20.glViewport(x, y, mOutputWidth, mOutputHeight);
 
         GLES20.glUseProgram(mProgramId);
@@ -117,6 +119,7 @@ public class BaseFilter {
         GLES20.glEnableVertexAttribArray(vCoord);
 
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+        //传如的是GL_TEXTURE_2D类型
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
         GLES20.glUniform1i(vTexture, 0);
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);

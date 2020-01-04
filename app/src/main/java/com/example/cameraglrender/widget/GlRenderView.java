@@ -33,7 +33,7 @@ public class GlRenderView extends GLSurfaceView {
 
         glRender = new GlRenderWrapper(this);
         setRenderer(glRender);
-
+        //手动暄软模式
         setRenderMode(RENDERMODE_WHEN_DIRTY);
 
     }
