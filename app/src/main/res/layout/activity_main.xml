@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity">
+
+    <com.example.cameraglrender.widget.GlRenderView
+        android:id="@+id/render_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <RadioGroup
+        android:id="@+id/rg_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_above="@+id/btn_record"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/record_speed_background"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_extra_slow"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/record_speed_button_background"
+            android:button="@null"
+            android:gravity="center"
+            android:text="极慢"
+            android:textColor="@drawable/record_speed_button_text"/>
+
+        <RadioButton
+            android:id="@+id/rb_slow"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/record_speed_button_background"
+            android:button="@null"
+            android:gravity="center"
+            android:text="慢"
+            android:textColor="@drawable/record_speed_button_text"/>
+
+        <RadioButton
+            android:id="@+id/rb_normal"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/record_speed_button_background"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="标准"
+            android:textColor="@drawable/record_speed_button_text"/>
+
+        <RadioButton
+            android:id="@+id/rb_fast"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/record_speed_button_background"
+            android:button="@null"
+            android:gravity="center"
+            android:text="快"
+            android:textColor="@drawable/record_speed_button_text"/>
+
+        <RadioButton
+            android:id="@+id/rb_extra_fast"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/record_speed_button_background"
+            android:button="@null"
+            android:gravity="center"
+            android:text="极快"
+            android:textColor="@drawable/record_speed_button_text"/>
+    </RadioGroup>
+
+    <com.example.cameraglrender.widget.RecordButton
+        android:id="@+id/btn_record"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/record_press_button_background"
+        android:gravity="center"
+        android:text="按住拍" />
+
+
+    <CheckBox
+        android:id="@+id/beauty"
+        android:layout_width="wrap_content"
+        android:text="美颜"
+        android:layout_height="wrap_content" />
+    <CheckBox
+        android:layout_toRightOf="@+id/beauty"
+        android:id="@+id/bigEye"
+        android:layout_width="wrap_content"
+        android:text="大眼"
+        android:layout_height="wrap_content" />
+    <CheckBox
+        android:layout_toRightOf="@+id/bigEye"
+        android:id="@+id/stick"
+        android:layout_width="wrap_content"
+        android:text="贴纸"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>

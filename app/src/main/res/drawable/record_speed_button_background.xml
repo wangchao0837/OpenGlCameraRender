@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--选中：矩形 圆边 白色-->
+    <item android:state_checked="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#ffffff"/>
+            <corners android:radius="2dp"/>
+        </shape>
+    </item>
+    <!--普通：矩形 圆边 透明-->
+    <item android:state_checked="false">
+        <shape android:shape="rectangle">
+            <solid android:color="#00000000"/>
+            <corners android:radius="2dp"/>
+        </shape>
+    </item>
+</selector>
