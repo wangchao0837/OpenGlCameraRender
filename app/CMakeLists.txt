@@ -17,7 +17,7 @@ include_directories(${CMAKE_SOURCE_DIR}/src/main/cpp/include)
 
 #set_target_properties(libopencv_java4 PROPERTIES IMPORTED_LOCATION src/main/cpp/jniLibs/armeabi-v7a/libopencv_java4.so)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_GLAGS} -L/${CMAKE_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_GLAGS} -L${CMAKE_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}")
 
 target_link_libraries(
         native-lib
